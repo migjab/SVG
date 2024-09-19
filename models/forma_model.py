@@ -1,0 +1,2 @@
+formas = []
+setores = []

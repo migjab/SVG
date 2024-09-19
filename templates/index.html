@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <!-- Menu da esquerda -->
+        <div class="menu">
+            <h3>Formulários</h3>
+            
+            <!-- Formulário para adicionar formas -->
+            
+            <!-- Formulário para atualizar tamanho do SVG -->
+            <form method="POST" action="{{ url_for('config.atualizar_tamanho_svg_rota') }}">
+                <label for="svgWidth">Largura:</label>
+                <input type="text" id="svgWidth" name="svgWidth" value="{{ config.svg_width }}">
+                <label for="svgHeight">Altura:</label>
+                <input type="text" id="svgHeight" name="svgHeight" value="{{ config.svg_height }}">
+                <button type="submit">Atualizar Tamanho</button>
+            </form>
+            
+            <!-- Formulário para download do SVG -->
+            <form method="POST" action="{{ url_for('config.baixar_svg') }}">
+                <label for="nomeArquivo">Nome do Arquivo:</label>
+                <input type="text" id="nomeArquivo" name="nomeArquivo" value="output.svg">
+                <button type="submit">Baixar SVG</button>
+            </form>
+            
+            <!-- Links para remover formas -->
+            <div>
+                <a href="{{ url_for('formas.remover_forma_rota') }}">Remover Última Forma</a>
+                <a href="{{ url_for('formas.remover_todas_formas_rota') }}">Remover Todas as Formas</a>
+            </div>
+        </div>
+        
+        <!-- Área principal com visualização do SVG -->
+        <div class="main-content">
+            
+            <div class="visualizacao-svg">
+                <div>{% autoescape false %}{{ svg_content }}{% endautoescape %}</div>
+            </div>
+        </div>
+
+        <!-- Menu da direita -->
+
+
+
+    <div class="menu">
+        <h3>Adicionar Setor</h3>
+        
+        <!-- Formulário para adicionar um setor -->
+        <form method="POST" action="{{ url_for('mapa.adicionar_setor') }}">
+            <label for="nomeSetor">Nome do Setor:</label>
+            <input type="text" id="nomeSetor" name="nomeSetor" required value="Ouro">
+
+            <label for="nomeClasse">Nome da Classe:</label>
+            <input type="text" id="nomeClasse" name="nomeClasse" required value="Mesa">
+
+            <label for="nomeIngresso">Nome do Ingresso:</label>
+            <input type="text" id="nomeIngresso" name="nomeIngresso" required value="Ingresso">
+
+            <label for="corSetor">Cor do Setor:</label>
+            <input type="color" id="corSetor" name="corSetor" required>
+
+            <button type="submit">Adicionar Setor</button>
+        </form>
+            <!-- Botão para remover o último setor -->
+    <form method="POST" action="{{ url_for('mapa.remover_setor') }}">
+        <button type="submit">Remover Último Setor</button>
+    </form>
+</div>
+
+
+        
+{% endblock %}
